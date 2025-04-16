@@ -5,6 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { lazy, Suspense } from "react";
+
+const Projects = lazy(() => import("./pages/Projects"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 
 const queryClient = new QueryClient();
 
@@ -16,7 +22,26 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/projects" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Projects />
+            </Suspense>
+          } />
+          <Route path="/projects/:id" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProjectDetail />
+            </Suspense>
+          } />
+          <Route path="/about" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <About />
+            </Suspense>
+          } />
+          <Route path="/contact" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Contact />
+            </Suspense>
+          } />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

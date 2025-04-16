@@ -95,7 +95,16 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-tech-light text-tech-dark antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  ::selection {
+    @apply bg-tech-purple/20 text-tech-dark;
   }
 }
