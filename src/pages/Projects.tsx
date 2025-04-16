@@ -1,7 +1,7 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { ProjectCard } from "@/components/ProjectCard";
-import { CircuitBoard, Cpu, Keyboard } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Maximize2 } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const projects = [
@@ -38,21 +38,26 @@ const Projects = () => {
       <div className="pt-24 px-4 max-w-7xl mx-auto">
         {/* Headshot Section */}
         <div className="mb-16 text-center animate-fade-in">
-          <div className="relative mx-auto w-32 h-32 mb-6 group">
-            <Avatar className="w-full h-full border-2 border-tech-purple/20 group-hover:border-tech-purple/40 transition-colors duration-300">
-              <AvatarImage
-                src="/lovable-uploads/1b2acfb6-0466-4c03-911d-fd3adab664ef.png"
-                alt="Fabian Molina"
-                className="object-cover"
-              />
-              <AvatarFallback className="bg-tech-dark text-tech-purple">FM</AvatarFallback>
-            </Avatar>
-            <div className="absolute inset-0 rounded-full bg-tech-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="relative mx-auto w-64 h-64 mb-6 group">
+            <div className="relative">
+              <Avatar className="w-full h-full border-4 border-tech-purple/30 group-hover:border-tech-purple/60 transition-all duration-300 transform group-hover:scale-105 shadow-2xl">
+                <AvatarImage
+                  src="/lovable-uploads/1b2acfb6-0466-4c03-911d-fd3adab664ef.png"
+                  alt="Fabian Molina"
+                  className="object-cover"
+                />
+                <AvatarFallback className="bg-tech-dark text-tech-purple text-3xl">FM</AvatarFallback>
+              </Avatar>
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Maximize2 className="text-tech-purple/70 hover:text-tech-purple" />
+              </div>
+            </div>
+            <div className="absolute inset-0 rounded-full bg-tech-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
           </div>
-          <h2 className="text-2xl font-display text-tech-purple mb-2 animate-slide-up" style={{ animationDelay: '100ms' }}>
+          <h2 className="text-3xl font-display text-tech-purple mb-2 animate-slide-up" style={{ animationDelay: '100ms' }}>
             Fabian Molina
           </h2>
-          <p className="text-gray-300/80 max-w-xl mx-auto animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <p className="text-gray-300/80 max-w-xl mx-auto animate-slide-up text-lg" style={{ animationDelay: '200ms' }}>
             Electrical Engineer & Developer focused on creating innovative solutions that bridge hardware and software
           </p>
         </div>
