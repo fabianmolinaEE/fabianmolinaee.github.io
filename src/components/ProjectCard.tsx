@@ -28,10 +28,10 @@ export const ProjectCard = ({ title, description, image, link, date, icon }: Pro
             {icon}
             <p className="text-xs text-tech-purple/80">{date}</p>
           </div>
-          <h3 className="text-lg font-display text-white mb-2 group-hover:text-tech-purple transition-colors">
+          <h3 className="text-lg font-display text-tech-light mb-2 group-hover:text-tech-purple transition-colors">
             {title}
           </h3>
-          <p className="text-sm text-gray-400 line-clamp-2 mb-4">{description}</p>
+          <p className="text-sm text-tech-light/70 line-clamp-2 mb-4">{description}</p>
           <div className="flex items-center text-tech-purple text-sm font-medium">
             Read More
             <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
