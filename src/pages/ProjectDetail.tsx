@@ -10,6 +10,7 @@ const projects = [
     image: "/lovable-uploads/glasses.jpg",
     date: "20 December 2024",
     icon: <Cpu className="text-tech-purple" />,
+    demoVideo: "https://www.youtube.com/embed/sP1z1fHg3ZA?mute=1",
     detailedDescription: `This project emerged from my computer systems class where we built C libraries from assembly up to a working console. Building upon this foundation, I developed AR smart glasses using a Mango Pi as the core processor.
 
 I wrote custom drivers in C to establish I2C communication between the Mango Pi and an accelerometer, along with an OLED display. The display is cleverly reflected onto specialized lenses, creating an augmented reality experience for viewing virtual stars in the user's field of vision.
