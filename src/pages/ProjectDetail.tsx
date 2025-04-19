@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic } from "lucide-react";
+import { useEffect } from "react";
 
 const projects = [
   {
@@ -204,6 +205,10 @@ I have built overcurrent protection systems to prevent short circuits, power dis
 const ProjectDetail = () => {
   const { id } = useParams();
   const project = projects.find(p => p.id === id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!project) {
     return (
