@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -7,8 +6,8 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" }
   ];
 
   return (

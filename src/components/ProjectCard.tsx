@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
@@ -25,7 +24,9 @@ export const ProjectCard = ({ title, description, image, link, date, icon }: Pro
         </div>
         <div className="p-6">
           <div className="flex items-center gap-2 mb-2">
-            {icon}
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              {icon}
+            </div>
             <p className="text-xs text-tech-purple/80">{date}</p>
           </div>
           <h3 className="text-lg font-display text-tech-light mb-2 group-hover:text-tech-purple transition-colors">

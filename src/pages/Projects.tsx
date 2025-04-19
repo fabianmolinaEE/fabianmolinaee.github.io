@@ -8,7 +8,7 @@ const projects = [
   {
     title: "FPGA Music Synthesizer",
     description: "A music synthesizer written in Verilog and programmed onto a PYNQ-Z2 FPGA with various add ons...",
-    image: "/lovable-uploads/1b2acfb6-0466-4c03-911d-fd3adab664ef.png",
+    image: "/loveable-uploads/glasses.jpg",
     link: "/projects/fpga-synthesizer",
     date: "15 October 2024",
     icon: <CircuitBoard className="text-tech-purple" />
@@ -16,7 +16,7 @@ const projects = [
   {
     title: "Magic Mirror Dashboard",
     description: "My magic mirror is a TV screen with a reflective film over it connected to a raspberry pi...",
-    image: "/lovable-uploads/b992642e-0c73-4092-8a8c-f9b3262fad9b.png",
+    image: "/lovable-uploads/MIRROR.png",
     link: "/projects/magic-mirror",
     date: "25 September 2024",
     icon: <Cpu className="text-tech-purple" />
