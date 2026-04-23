@@ -13,10 +13,6 @@ const projects = [
     icon: <Layers className="text-tech-purple" />,
     gallery: [
       {
-        src: "/lovable-uploads/vlsi-floorplan.jpg",
-        caption: "Post-PnR routing view in Cadence Innovus — 3.5705 mm², 50 MHz, 0 DRC violations"
-      },
-      {
         src: "/lovable-uploads/vlsi-waveform.png",
         caption: "HLS simulation waveform showing correct double-buffer handshaking (input/weight/output valid-ready signals)"
       },
@@ -26,7 +22,8 @@ const projects = [
       },
       {
         src: "/lovable-uploads/vlsi-resnet-diagram.png",
-        caption: "ResNet-18 architecture — all 17 convolution layers validated on the systolic array"
+        caption: "ResNet-18 architecture — all 17 convolution layers validated on the systolic array",
+        small: true
       }
     ],
     detailedDescription: `As part of Stanford's EE272 Mixed-Signal Design and EDA course, my partner Ruben Carrazco and I designed and implemented a 16×16 convolutional systolic array DNN accelerator from scratch, carrying it through every stage of a real chip design flow.
@@ -302,9 +299,9 @@ const ProjectDetail = () => {
               {project.gallery && (
                 <div className="mt-10 mb-8">
                   <h2 className="text-xl font-display text-cyan-400 mb-6">Project Gallery</h2>
-                  <div className="grid grid-cols-1 gap-6">
+                  <div className="flex flex-col gap-6">
                     {project.gallery.map((item, index) => (
-                      <div key={index} className="rounded-lg overflow-hidden border border-tech-purple/20">
+                      <div key={index} className={`rounded-lg overflow-hidden border border-tech-purple/20 ${item.small ? 'max-w-xs' : 'w-full'}`}>
                         <img
                           src={item.src}
                           alt={item.caption}
