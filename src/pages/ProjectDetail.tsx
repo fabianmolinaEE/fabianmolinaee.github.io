@@ -1,9 +1,48 @@
 import { useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
-import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Layers } from "lucide-react";
 import { useEffect } from "react";
 
 const projects = [
+  {
+    id: "vlsi-dnn-accelerator",
+    title: "VLSI DNN Accelerator",
+    description: "Designed and taped out a 16×16 systolic array DNN accelerator through the full chip design flow — from design space exploration and RTL to HLS, synthesis, place & route, and signoff — as part of Stanford's EE272 mixed-signal VLSI course.",
+    image: "/lovable-uploads/vlsi-floorplan.jpg",
+    date: "28 February 2026",
+    icon: <Layers className="text-tech-purple" />,
+    detailedDescription: `As part of Stanford's EE272 Mixed-Signal Design and EDA course, my partner Ruben Carrazco and I designed and implemented a 16×16 convolutional systolic array DNN accelerator from scratch, carrying it through every stage of a real chip design flow.
+
+The accelerator is built around 256 MAC units arranged in a systolic dataflow, with an input double buffer, weight double buffer, and output accumulation buffer. Tiled execution allows it to handle arbitrary convolution layer sizes. We validated correctness across all 8 unique ResNet-18 convolution layers with 17 passing RTL tests written in SystemVerilog with UVM testbenches — covering the FIFO, double buffers, MAC unit, address generator, and the full systolic array.
+
+Design Space Exploration (HW1): Using the Interstellar tool, we swept 20+ memory configurations and PE counts within a 2mm² area budget. Our optimal design settled on 484 PEs (22×22 array), a 2-level register file (16B + 32B per PE), and a 64KB global buffer — achieving 40.01 mJ total energy and 59.3M cycles across all ResNet-18 layers.
+
+RTL Implementation (HW2–4): We wrote the full accelerator in Verilog and SystemVerilog, implementing the FIFO, input/weight double buffers (with bank-switching and simultaneous read/write), accumulation buffer, MAC unit, skew registers, and systolic array controller. UVM-style testbenches with scoreboards and randomized stimulus verified every submodule.
+
+HLS Implementation (HW5): We re-implemented the accelerator in C++ using Catapult HLS, applying loop pipelining (#pragma hls_pipeline), full loop unrolling over IC0/OC0 dimensions, and fixed loop bounds. This pushed the design toward compute-bound execution — conv2_x reached 85.2% MAC utilization at 530K cycles, well within the 540K target.
+
+Synthesis (HW6): Using Synopsys Design Compiler with SRAM macro wrappers (4096×128 and 8192×128), we synthesized the design targeting multiple clock frequencies. The Verilog implementation met timing at 50 MHz with a final area of 21.27 mm² and 1.581 mW total power — 98.8% of cell area coming from SRAM macros.
+
+Place & Route and Signoff (HW7): We implemented a macro-aware physical design flow in Cadence Innovus. Macro-first floorplanning placed SRAM instances manually with non-uniform halos; pins were assigned by traffic class (inputs top, outputs bottom, clocks/control left); and a custom PDN added core rings, block rings around each SRAM, a global mesh, and explicit macro power-pin routing. Final post-PnR result: 3.5705 mm², 50 MHz, 0.217 mW, and 0 DRC violations.
+
+Final Report: We analyzed YOLO-v11 as a target workload, showing how the backbone's 3×3 and 1×1 convolutions map well to our systolic array, and identifying where the design would need enhancements — wider activation bandwidth, fused upsample/concat/pooling operators, and a multi-scale-aware scheduler — to handle a full detection network in production.`,
+    skills: [
+      "Verilog / SystemVerilog",
+      "UVM Verification",
+      "High-Level Synthesis (HLS)",
+      "C++",
+      "Synopsys Design Compiler",
+      "Cadence Innovus",
+      "SRAM Macro Integration",
+      "Physical Design (Floorplan, P&R, Signoff)",
+      "Systolic Array Architecture",
+      "Design Space Exploration",
+      "mflowgen",
+      "Python",
+      "ResNet-18 / DNN Workloads"
+    ],
+    learnings: `This course gave me end-to-end experience with a real chip design flow for the first time. The biggest lesson was how different stages of the flow reveal different bottlenecks — what looked like a compute-bound problem in design space exploration became a memory-bandwidth problem in RTL, and then a physical routing problem in place and route. Writing UVM testbenches taught me how professional verification is done at scale. HLS showed me how C++ abstractions translate to hardware and where the tool needs explicit guidance. Synthesis and P&R made me appreciate that area and power aren't just about logic — with SRAM macros dominating 98.8% of the area, memory architecture decisions made in week one determined the physical result at the end of the quarter. The macro-aware floorplanning and PDN work in Innovus was particularly eye-opening: routing a bus-heavy, macro-dominated design requires thinking about the physical structure from the very start, not as a late-stage cleanup problem.`
+  },
   {
     id: "ar-smart-glasses",
     title: "AR Mango Smart Glasses",

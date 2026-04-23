@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { ProjectCard } from "@/components/ProjectCard";
-import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Github, Linkedin, Mail } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Github, Linkedin, Mail, Layers } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useRef } from "react";
 
@@ -120,6 +120,14 @@ const CircuitAnimation = () => {
 };
 
 const projects = [
+  {
+    title: "VLSI DNN Accelerator",
+    description: "Designed a 16×16 systolic array DNN accelerator through the full chip flow — RTL, HLS, synthesis, and place & route — achieving 0 DRC violations and 50 MHz at 0.217 mW post-PnR in Stanford's EE272.",
+    image: "/lovable-uploads/vlsi-floorplan.jpg",
+    link: "/projects/vlsi-dnn-accelerator",
+    date: "28 February 2026",
+    icon: <Layers className="text-tech-purple w-5 h-5" />
+  },
   {
     title: "AR Mango Smart Glasses",
     description: "Built custom AR smart glasses using a Mango Pi, accelerometer, and OLED display, with a custom graphics library for star visualization...",
