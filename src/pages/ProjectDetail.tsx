@@ -11,6 +11,24 @@ const projects = [
     image: "/lovable-uploads/vlsi-floorplan.jpg",
     date: "28 February 2026",
     icon: <Layers className="text-tech-purple" />,
+    gallery: [
+      {
+        src: "/lovable-uploads/vlsi-floorplan.jpg",
+        caption: "Post-PnR routing view in Cadence Innovus — 3.5705 mm², 50 MHz, 0 DRC violations"
+      },
+      {
+        src: "/lovable-uploads/vlsi-waveform.png",
+        caption: "HLS simulation waveform showing correct double-buffer handshaking (input/weight/output valid-ready signals)"
+      },
+      {
+        src: "/lovable-uploads/vlsi-performance-table.png",
+        caption: "Final HLS accelerator cycles and MAC utilization across all 8 ResNet-18 convolution layers"
+      },
+      {
+        src: "/lovable-uploads/vlsi-resnet-diagram.png",
+        caption: "ResNet-18 architecture — all 17 convolution layers validated on the systolic array"
+      }
+    ],
     detailedDescription: `As part of Stanford's EE272 Mixed-Signal Design and EDA course, my partner Ruben Carrazco and I designed and implemented a 16×16 convolutional systolic array DNN accelerator from scratch, carrying it through every stage of a real chip design flow.
 
 The accelerator is built around 256 MAC units arranged in a systolic dataflow, with an input double buffer, weight double buffer, and output accumulation buffer. Tiled execution allows it to handle arbitrary convolution layer sizes. We validated correctness across all 8 unique ResNet-18 convolution layers with 17 passing RTL tests written in SystemVerilog with UVM testbenches — covering the FIFO, double buffers, MAC unit, address generator, and the full systolic array.
@@ -281,6 +299,26 @@ const ProjectDetail = () => {
                 {project.detailedDescription}
               </p>
               
+              {project.gallery && (
+                <div className="mt-10 mb-8">
+                  <h2 className="text-xl font-display text-cyan-400 mb-6">Project Gallery</h2>
+                  <div className="grid grid-cols-1 gap-6">
+                    {project.gallery.map((item, index) => (
+                      <div key={index} className="rounded-lg overflow-hidden border border-tech-purple/20">
+                        <img
+                          src={item.src}
+                          alt={item.caption}
+                          className="w-full object-contain bg-black/40"
+                        />
+                        <p className="text-sm text-cyan-200/70 px-4 py-2 bg-tech-dark/60 italic">
+                          {item.caption}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {project.demoVideo && (
                 <div className="mt-12 mb-8">
                   <h2 className="text-xl font-display text-cyan-400 mb-6">Demo Video</h2>
