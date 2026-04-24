@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { ProjectCard } from "@/components/ProjectCard";
-import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Github, Linkedin, Mail, Layers } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Github, Linkedin, Mail, Layers, Shield } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useRef } from "react";
 
@@ -127,6 +127,14 @@ const projects = [
     link: "/projects/vlsi-dnn-accelerator",
     date: "28 February 2026",
     icon: <Layers className="text-tech-purple w-5 h-5" />
+  },
+  {
+    title: "SecureWatch: Smart Biometric Video Doorbell",
+    description: "STM32-based wireless doorbell with motion detection via TOF sensor, real-time video streaming over WiFi, and fingerprint biometric authentication — built for EE 186 Embedded Systems.",
+    image: "/lovable-uploads/securewatch-hardware.jpg",
+    link: "/projects/smart-doorbell",
+    date: "9 December 2025",
+    icon: <Shield className="text-tech-purple w-5 h-5" />
   },
   {
     title: "AR Mango Smart Glasses",
