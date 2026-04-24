@@ -1,10 +1,18 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { ProjectCard } from "@/components/ProjectCard";
-import { CircuitBoard, Cpu, Keyboard, Maximize2 } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Maximize2, Shield } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const projects = [
+  {
+    title: "SecureWatch: Smart Biometric Video Doorbell",
+    description: "STM32-based wireless doorbell with motion detection, real-time video streaming, and fingerprint authentication over WiFi.",
+    image: "/lovable-uploads/securewatch-hardware.jpg",
+    link: "/projects/smart-doorbell",
+    date: "9 December 2025",
+    icon: <Shield className="text-tech-purple" />
+  },
   {
     title: "FPGA Music Synthesizer",
     description: "A music synthesizer written in Verilog and programmed onto a PYNQ-Z2 FPGA with various add ons...",

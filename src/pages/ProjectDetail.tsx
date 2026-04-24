@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
-import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Layers } from "lucide-react";
+import { CircuitBoard, Cpu, Keyboard, Ruler, Zap, Cloud, Bot, Mic, Layers, Shield } from "lucide-react";
 import { useEffect } from "react";
 
 const projects = [
@@ -57,6 +57,59 @@ Final Report: We analyzed YOLO-v11 as a target workload, showing how the backbon
       "ResNet-18 / DNN Workloads"
     ],
     learnings: `This course gave me end-to-end experience with a real chip design flow for the first time. The biggest lesson was how different stages of the flow reveal different bottlenecks — what looked like a compute-bound problem in design space exploration became a memory-bandwidth problem in RTL, and then a physical routing problem in place and route. Writing UVM testbenches taught me how professional verification is done at scale. HLS showed me how C++ abstractions translate to hardware and where the tool needs explicit guidance. Synthesis and P&R made me appreciate that area and power aren't just about logic — with SRAM macros dominating 98.8% of the area, memory architecture decisions made in week one determined the physical result at the end of the quarter. The macro-aware floorplanning and PDN work in Innovus was particularly eye-opening: routing a bus-heavy, macro-dominated design requires thinking about the physical structure from the very start, not as a late-stage cleanup problem.`
+  },
+  {
+    id: "smart-doorbell",
+    title: "SecureWatch: Smart Biometric Video Doorbell",
+    description: "A wireless smart doorbell built on an STM32 microcontroller featuring motion detection, real-time video streaming, fingerprint authentication, and WiFi-based alerts — designed as a low-cost security system for dorm environments.",
+    image: "/lovable-uploads/securewatch-hardware.jpg",
+    date: "9 December 2025",
+    icon: <Shield className="text-tech-purple" />,
+    gallery: [
+      {
+        src: "/lovable-uploads/securewatch-hardware.jpg",
+        caption: "Fully assembled SecureWatch prototype with TOF sensor, OV7670 camera, fingerprint sensor, OLED display, WiFi module, and doorbell button"
+      },
+      {
+        src: "/lovable-uploads/securewatch-circuit.jpg",
+        caption: "Circuit diagram showing STM32 pin assignments for all peripherals — I2C bus shared by camera (SCCB), OLED, and TOF; UART for fingerprint sensor; SPI for WiFi"
+      },
+      {
+        src: "/lovable-uploads/securewatch-fsm.jpg",
+        caption: "High-level state machine: IDLE → RECORDING (motion) → ACTIVE (button press) → SENSING (fingerprint touch) → IDENTIFIED (known guest), with timeout fallbacks"
+      }
+    ],
+    detailedDescription: `SecureWatch is a low-cost wireless video doorbell system built for EE 186 (Embedded Systems) at Stanford. The system was designed primarily for dorm environments, where guests need to be recognized and the resident needs to be notified remotely. Our team of four designed and integrated the full hardware/firmware stack on an STM32 microcontroller.
+
+The system uses a time-of-flight (TOF) sensor to detect when someone approaches the door, triggering a transition from idle to continuous video recording mode. When the visitor presses the doorbell button, the system enters active mode — the OLED prompts the visitor to scan their fingerprint, and a WiFi notification is sent to a companion app. The R307S fingerprint sensor then handles biometric identification over UART, transitioning to an "identified" state if the visitor is a known guest, or returning to active on failure.
+
+The OV7670 camera is configured over SCCB (I²C-compatible) and captures image frames via the STM32's DCMI peripheral with DMA transfers. To prevent blocking, a DMA completion callback sets an image_ready flag, and the main loop streams the frame to the companion app over TCP/IP using the Adafruit Airlift WiFi module (SPI). A framing and acknowledgement schema prevents buffer overruns and dropped frames.
+
+The firmware is structured around a primary state machine (IDLE, RECORDING, ACTIVE, FINGER, IDENTIFIED, ENROLL) and a nested camera state machine (CAM_IDLE, CAM_CAPTURING, CAM_SENDING). All state transitions are driven by GPIO interrupts, network commands, and timeouts — keeping the system fully non-blocking across all peripherals.
+
+A notable debugging challenge: our original PIR motion sensor appeared defective from manufacturing. After exhaustive wiring and code review, we pivoted to the TOF sensor, which gave us the bonus of configurable distance thresholds and far fewer false alarms. A second challenge was color distortion in camera output that turned out to be a misconfigured STM32 HAL pin — caught by line-by-line comparison against our standalone camera test code.`,
+    skills: [
+      "STM32 (ARM Cortex-M)",
+      "C / Embedded C",
+      "I²C / SCCB",
+      "SPI",
+      "UART",
+      "DCMI + DMA",
+      "GPIO Interrupts",
+      "OV7670 Camera",
+      "R307S Fingerprint Sensor",
+      "VL53L0X TOF Sensor",
+      "Adafruit Airlift WiFi",
+      "OLED Display",
+      "TCP/IP Networking",
+      "Finite State Machines",
+      "Embedded Systems"
+    ],
+    learnings: `This project gave me hands-on experience integrating many peripherals simultaneously on a single microcontroller — something that exposes coordination challenges you don't encounter when testing components in isolation. The biggest lesson was the value of non-blocking firmware design: using DMA callbacks and flag-based state machines allowed the system to stream video, poll for fingerprint input, and handle WiFi communication concurrently without any peripheral starving another.
+
+The PIR sensor failure early in the project taught me how to make a graceful mid-project pivot — the TOF sensor we substituted actually yielded a better system with configurable range thresholds. The camera color distortion bug reinforced the importance of systematic comparison when debugging integration issues: the problem was invisible in hardware and only showed up when we did a careful register-by-register diff between our integrated config and the working standalone version.
+
+I also deepened my understanding of communication protocols at a practical level — knowing when DCMI/DMA is the right tool for high-throughput image data versus when UART is fine for a low-bandwidth fingerprint command interface, and how to layer a framing/ACK schema over raw TCP to make streaming reliable.`
   },
   {
     id: "ar-smart-glasses",
